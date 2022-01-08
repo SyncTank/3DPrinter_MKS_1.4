@@ -3,9 +3,11 @@
 Setting up MKS_GEN_V1.4 board, using the Anet A8 plus as a base for the modifications
 
 <h2>Wiring</h2>
-Comming from the base of a Anet A8 plus most of the wires you can just plug in. 
+Comming from the base of a Anet A8 plus most of the wires you can just plug in. <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/148625604-0b005473-f4f0-4b00-a7c4-4caa88d126ff.png)
+
+![image](https://user-images.githubusercontent.com/30980904/148626779-cb2ca516-b31d-4285-9a10-1c3d6408c83b.png)
 
 
 <h2>Firmware</h2>
@@ -49,12 +51,15 @@ Or double click the Marlin.ino to open into the arduino project. <br>
 
 With all this done we are now ready to start messing with the Firmware; Plug in the printer cable make the changes then build/upload.<br>
 
-<h2>DataSheet</h2><br>
+<h2>DataSheet | References</h2><br>
 
 TMC2208 : https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC220x_TMC2224_Datasheet_Rev1.10.pdf <br>
 
 Pinouts for the MKS_GEN_V1.4<br>
 ![image](https://user-images.githubusercontent.com/30980904/148620455-03ec13d7-c8cf-4827-8ac7-2358e2bd6681.png)
+
+TMC2208 Setup SKR
+SKR : https://www.instructables.com/TMC2208-UART-on-BigTreeTechBIQU-SKR-V11-and-V13-Co/
 
 <h1> Items from amazon </h1>
 
