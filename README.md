@@ -20,6 +20,14 @@ Comming from the base of a Anet A8 plus most of the wires you can just plug in. 
 
 ![image](https://user-images.githubusercontent.com/30980904/149039056-f6eee359-02f1-4bb9-8110-7a92ec691701.png)<br>
 
+Next put in the jumper cap in the correct spot following this diagram <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149259311-b2efae1d-323f-4a7c-92b7-359e493dd743.png) <br>
+
+For TMC2208 chips on the MKS_GEN_V1.4 its two cap on each stepper for 1/16.<br>
+
+![image](https://user-images.githubusercontent.com/30980904/149259755-fc521aa8-2047-4d75-a4dc-a35ea7c08fa1.png) <br>
+
 <h2>Stepper Driver (TMC2208 )</h2>
 
 For whatever chip you get set the potentiometer to the vRef you will be working with on your motors. (Safety) <br>
@@ -113,7 +121,26 @@ Or double click the Marlin.ino to open into the arduino project. <br>
 
 With all this done we are now ready to start messing with the Firmware; Plug in the printer cable make the changes then build/upload.<br>
 
-<h2>Arduino Only</h2>
+<h2>Code Changes</h2>
+
+<h3>Configuration.h</h3><br>
+
+Search for <b>motherboard</b> and replace that with your motherboard's name.<br><br>
+
+![image](https://user-images.githubusercontent.com/30980904/149241950-2d1d91a7-fa3c-4ae9-bf72-66760ab0621c.png) <br>
+
+To find your motherboard name its in boards.h <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149257657-c0a41dd6-0708-4cf8-91ef-4e9fc58d1934.png) <br>
+ 
+Or alternatively, you can go to the marlin's board page and find it there. https://marlinfw.org/docs/development/boards.html <br>
+Next change the <b>Baudrate</b> to 250000; its the best case for most boards.<br>
+
+![image](https://user-images.githubusercontent.com/30980904/149261840-00b132d0-1ce3-4740-869a-3bc1706bdfb0.png) <br>
+
+Right below you can change the Custom_Machine_name to whatever you want its optional. <br>
+
+
 
 <h2>DataSheet | References</h2><br>
 
