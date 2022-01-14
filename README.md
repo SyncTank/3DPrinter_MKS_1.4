@@ -210,7 +210,6 @@ First <b>enable SDCARD_CONNECTION</b> and define it, the one used here ( NeoPixe
 
 
 
-
 <h2>DataSheet | References</h2><br>
 
 TMC2208 : https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC220x_TMC2224_Datasheet_Rev1.10.pdf <br>
