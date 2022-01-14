@@ -139,6 +139,20 @@ Next change the <b>Baudrate</b> to 250000; its the best case for most boards.<br
 ![image](https://user-images.githubusercontent.com/30980904/149261840-00b132d0-1ce3-4740-869a-3bc1706bdfb0.png) <br>
 
 Right below you can change the Custom_Machine_name to whatever you want its optional. <br>
+Next go to the EndStop section and enable <b>USE_ZMAX_PLUG</b> then scroll down to <b>Z_MIN_PROBE_ENDSTOP_INVERTING</b> and make this false<br>
+
+![image](https://user-images.githubusercontent.com/30980904/149428840-0a2cf3cd-d36f-402d-bce9-22998e30c2f4.png) <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149428994-39f80dd0-9620-4ec5-a8fa-8fe0f5889f2c.png) <br>
+
+Make sure <b>Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN</b> is enable, use can also use set the pin yourself by scrolling down <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149429297-c5870602-200b-482f-b2a4-98cc87a4c6d2.png) <br>
+
+Now search BLTOUCH enable <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149430682-41b8840f-1016-4129-b50f-fc74bec7ed4c.png) <br>
+
 
 
 
@@ -165,6 +179,9 @@ https://www.instructables.com/Anet-A8-Plus-Update-Board-to-MKS-GEN-14-TMC2208-3D
 https://www.instructables.com/UART-This-Serial-Control-of-Stepper-Motors-With-th/ <br>
 
 https://github.com/bigtreetech/BIGTREETECH-TMC2208-V3.0 <br>
+
+Marlin : <br>
+https://marlinfw.org/docs/configuration/configuration.html <br>
 
 <h1> Items from amazon </h1>
 
