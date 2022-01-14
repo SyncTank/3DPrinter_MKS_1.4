@@ -139,19 +139,74 @@ Next change the <b>Baudrate</b> to 250000; its the best case for most boards.<br
 ![image](https://user-images.githubusercontent.com/30980904/149261840-00b132d0-1ce3-4740-869a-3bc1706bdfb0.png) <br>
 
 Right below you can change the Custom_Machine_name to whatever you want its optional. <br>
-Next go to the EndStop section and enable <b>USE_ZMAX_PLUG</b> then scroll down to <b>Z_MIN_PROBE_ENDSTOP_INVERTING</b> and make this false<br>
+Next go to the EndStop section and <b>enable</b> <b>USE_ZMAX_PLUG</b>. <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149428840-0a2cf3cd-d36f-402d-bce9-22998e30c2f4.png) <br>
 
-![image](https://user-images.githubusercontent.com/30980904/149428994-39f80dd0-9620-4ec5-a8fa-8fe0f5889f2c.png) <br>
+Scroll down to <b>Z_MIN_PROBE_ENDSTOP_INVERTING</b> and make this <b>false</b>.<br>
+If your <b>Z_MIN_ENDSTOP_INVERTING</b> is <b>true</b> then your going to set it <b>false</b>, this variable mimics the Z_MIN_PROBE<br>
 
-Make sure <b>Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN</b> is enable, use can also use set the pin yourself by scrolling down <br>
+![image](https://user-images.githubusercontent.com/30980904/149433706-51b1e4db-758d-493a-84bb-3c1d6d785ede.png) <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149433499-fbf48357-c99f-481a-baca-edfe71c3f35c.png) <br>
+
+Make sure <b>Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN</b> is <b>enable</b>, use can also use set the pin yourself by scrolling down <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149429297-c5870602-200b-482f-b2a4-98cc87a4c6d2.png) <br>
 
-Now search BLTOUCH enable <br>
+Now search BLTOUCH <b>enable</b> it <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149430682-41b8840f-1016-4129-b50f-fc74bec7ed4c.png) <br>
+
+You can put in the offset to the 3d Touch sensor in the section below, but is optional since you can do this step later. <br>
+There is a required min distance from the nozzle so check your manuel on the 3d touch sensor.<br>
+
+![image](https://user-images.githubusercontent.com/30980904/149431715-45606b82-58f8-4ea5-8271-600609351802.png) <br>
+
+Next <b>enable</b> <b> AUTO_BED_LEVELING_BILINEAR</b> then go to section who uses the <b>GRID_MAX_POINTS_X</b> and change that to 5. <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149432072-eda94531-079b-403c-b6cf-bff7f4897a91.png) <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149432424-b4d39c47-665f-4259-83f2-4639db8b552c.png) <br>
+
+Optional but recommended, <b>enable</b> <b>Z_SAFE_HOMING</b> <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149432664-0e918e6f-d52f-4c84-9f0a-e12df2d71d3b.png) <br>
+
+The settings to save the nozzle distance & leveling is next, search for both <b>EEPROM_SETTINGS</b> & <b>RESTORE_LEVELING_AFTER_G28</b> <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149433072-3554516d-d18a-4ea0-bc50-85123bb43dc0.png) <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149433182-141aa872-ffac-4327-b468-7d5069943a25.png) <br>
+
+Moving on from the 3D touch sensor, now we do the step drivers, search for <b>stepper drivers</b> and change the driver type. <br>
+Done by replacing the type with the chip you have, the one used here is the TMC2208 you also add the 5th driver here if you have it. <br> 
+
+![image](https://user-images.githubusercontent.com/30980904/149440401-b183c181-43c9-4c23-a99c-70622dc0ec64.png) <br>
+
+To use the TMC2208 with the UArt feature we need to <b>disable ENDSTOP_INTERRUPTS_FEATURE</b> read more [here](https://github.com/MarlinFirmware/Marlin/issues/9221).<br> The TLDR : ENDSTOP_INTERRUPTS_FEATURE and the TMC2208 both use pin change interrupts solution is to define the TMC2208 on the hardware serial ports, but I won't cover that. <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149444205-8718e870-29f6-42fd-acb9-fb56f908bb74.png) <br>
+
+Now search for the display <b>MKS_MINI_12864_V3</b> used in project, and <b>enable</b> it, then search and <b>enable NEOPIXEL_LED</b>.<br> 
+
+![image](https://user-images.githubusercontent.com/30980904/149444323-192b5392-7e36-4a10-b1a1-8e4ad925bbba.png) <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149444367-ac84df0f-5459-4e2e-a102-ae7d2a48def5.png) <br>
+
+Make sure to <b>disable</b> the old display used otherwise you will get an error.
+<br>Since we are coming from ANET we need to <b>disable</b> the display and its delay. 
+<br>LCD display is <b>ANET_FULL_GRAPHICS_LCD</b>. <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149444891-648ebd83-10dc-4b05-bdcf-942618380e70.png) <br>
+
+With this the basic build is done on config. Build and make sure you have no errors, next open up Configuration_adv.h.<br>
+
+<h3>Configuration_adv.h</h3>
+<h4><b>Optional SDCARD</b></h4>
+First <b>enable SDCARD_CONNECTION</b> and define it, the one used here ( NeoPixel ) is on the LCD. <br><br>
+
+![image](https://user-images.githubusercontent.com/30980904/149446757-a82dd7ae-3442-40bd-a407-86a6a929e2f6.png) <br>
 
 
 
@@ -163,7 +218,9 @@ TMC2208 : https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC22
 https://www.youtube.com/watch?v=7VHwcEroHPk&t=550s <br>
 
 Pinouts for the MKS_GEN_V1.4<br>
-![image](https://user-images.githubusercontent.com/30980904/148620455-03ec13d7-c8cf-4827-8ac7-2358e2bd6681.png)
+![image](https://user-images.githubusercontent.com/30980904/148620455-03ec13d7-c8cf-4827-8ac7-2358e2bd6681.png) <br>
+
+https://www.roboter-bausatz.de/media/pdf/0b/f0/a7/MKS-Gen-DataSheet.pdf <br>
 
 TMC2208 Setup SKR
 SKR : https://www.instructables.com/TMC2208-UART-on-BigTreeTechBIQU-SKR-V11-and-V13-Co/ <br>
@@ -182,6 +239,8 @@ https://github.com/bigtreetech/BIGTREETECH-TMC2208-V3.0 <br>
 
 Marlin : <br>
 https://marlinfw.org/docs/configuration/configuration.html <br>
+
+https://github.com/MarlinFirmware/Marlin/issues/9221 <br>
 
 <h1> Items from amazon </h1>
 
