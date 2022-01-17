@@ -208,7 +208,39 @@ First <b>enable SDCARD_CONNECTION</b> and define it, the one used here ( NeoPixe
 
 ![image](https://user-images.githubusercontent.com/30980904/149446757-a82dd7ae-3442-40bd-a407-86a6a929e2f6.png) <br>
 
+Search for <b>tmc_smart</b> and scroll down to AXIS_IS_TMC(X).<br>
+This is where we can edit the stepper driver using firmware since we have UART.<br>
+In the current section of the Axis input the new current, since we use 5 drivers its the same across the board.<br>
+Set X,Y,Z,E0(Z2) Current and Microsteps. <br>
 
+![image](https://user-images.githubusercontent.com/30980904/149712652-4f0bd6d5-c1fd-42d8-97da-770e7ceb7062.png) <br>
+
+<h4><b>Optional</b></h4>
+
+<b>Enable</b> stealthchop for less noise from the motors. <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149713047-1bf5ce15-d90e-431f-9098-bc56bf9c8db9.png) <br>
+
+<b>Enable</b> <b>HYBRID_THRESHOLD</b> for stealthchop to only active during certain speeds.<br>
+
+![image](https://user-images.githubusercontent.com/30980904/149713315-d73889d0-f168-49ff-bfe6-2759b465471f.png) <br>
+
+For debugged on the printer <b>enable</b> <b>TMC_DEBUG</b> & <b>MONITOR_DRIVER_STATUS</b>. <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149713466-418ae3a4-660c-4a11-bcf0-f369d66185c2.png) <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149713532-544a719e-d3bb-4fc2-b90f-f3d49b37d907.png) <br>
+
+<h4><b>Final</b></h4>
+
+The MKS_GEN_V1.4 uses the <b>pins_RAMPS.h</b> config for its pin layout, so open it up and search for <b>Z2_SERIAL_TX_PIN</b> <br>
+Your going to have to assign these pins to the pinouts you want to use. I use <b>58</b> for <b>TX</b> and <b>57</b> for <b>RX</b>. <br>
+
+![image](https://user-images.githubusercontent.com/30980904/149715070-dfaf0622-032a-466e-850d-6e2c133a6507.png) <br>
+
+<h2>Congratulations</h2>
+
+Nice! You just finished both the wiring and firmware, now just build/compile and load it into your board. <br>
 
 <h2>DataSheet | References</h2><br>
 
