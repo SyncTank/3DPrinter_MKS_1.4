@@ -155,18 +155,18 @@
 #ifndef E0_CS_PIN
   #define E0_CS_PIN                           42
 #endif
-// Edit for changed from E1 to Z2 -rudy
-#ifndef Z2_STEP_PIN
-  #define Z2_STEP_PIN                         36
+
+#ifndef E1_STEP_PIN
+  #define E1_STEP_PIN                         36
 #endif
-#ifndef Z2_DIR_PIN
-  #define Z2_DIR_PIN                          34
+#ifndef E1_DIR_PIN
+  #define E1_DIR_PIN                          34
 #endif
-#ifndef Z2_ENABLE_PIN
-  #define Z2_ENABLE_PIN                       30
+#ifndef E1_ENABLE_PIN
+  #define E1_ENABLE_PIN                       30
 #endif
-#ifndef Z2_CS_PIN
-  #define Z2_CS_PIN                           44
+#ifndef E1_CS_PIN
+  #define E1_CS_PIN                           44
 #endif
 
 //
