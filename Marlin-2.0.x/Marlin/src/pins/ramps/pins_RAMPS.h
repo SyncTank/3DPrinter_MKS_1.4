@@ -345,18 +345,18 @@
   #ifndef Y2_SERIAL_RX_PIN
     #define Y2_SERIAL_RX_PIN                  -1
   #endif
-
+// 42 65
   #ifndef Z_SERIAL_TX_PIN
-    #define Z_SERIAL_TX_PIN                   -1//42
+    #define Z_SERIAL_TX_PIN                   58
   #endif
   #ifndef Z_SERIAL_RX_PIN
-    #define Z_SERIAL_RX_PIN                   -1//65
-  #endif
+    #define Z_SERIAL_RX_PIN                   57
+  #endif // 58 57
   #ifndef Z2_SERIAL_TX_PIN
-    #define Z2_SERIAL_TX_PIN                  42//58
+    #define Z2_SERIAL_TX_PIN                  42
   #endif
   #ifndef Z2_SERIAL_RX_PIN
-    #define Z2_SERIAL_RX_PIN                  65//57
+    #define Z2_SERIAL_RX_PIN                  65
   #endif
 
   #ifndef E0_SERIAL_TX_PIN
