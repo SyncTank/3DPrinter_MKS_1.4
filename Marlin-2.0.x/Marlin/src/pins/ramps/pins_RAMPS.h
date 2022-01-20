@@ -353,7 +353,7 @@
     #define Z_SERIAL_RX_PIN                   65
   #endif
   #ifndef Z2_SERIAL_TX_PIN
-    #define Z2_SERIAL_TX_PIN                  53
+    #define Z2_SERIAL_TX_PIN                  49
   #endif
   #ifndef Z2_SERIAL_RX_PIN
     #define Z2_SERIAL_RX_PIN                  51
