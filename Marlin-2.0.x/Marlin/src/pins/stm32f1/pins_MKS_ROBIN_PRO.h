@@ -133,6 +133,9 @@
   //#define E1_HARDWARE_SERIAL MSerial1
   //#define E2_HARDWARE_SERIAL MSerial1
 
+  //
+  // Software serial
+  //
   #define X_SERIAL_TX_PIN                   PF7
   #define X_SERIAL_RX_PIN                   PF8
 
@@ -176,25 +179,10 @@
 //#define TEMP_0_CS_PIN                     PF11  // TC2 - CS2
 
 #define POWER_LOSS_PIN                      PA2   // PW_DET
+#define PS_ON_PIN                           PG11  // PW_OFF
 #define FIL_RUNOUT_PIN                      PA4   // MT_DET1
-#define FIL_RUNOUT2_PIN                     PE6   // MT_DET2
-#define FIL_RUNOUT3_PIN                     PG14  // MT_DET3
-
-//
-// Power Supply Control
-//
-#if ENABLED(MKS_PWC)
-  #if ENABLED(TFT_LVGL_UI)
-    #undef PSU_CONTROL
-    #undef MKS_PWC
-    #define SUICIDE_PIN                     PG11
-    #define SUICIDE_PIN_STATE               LOW
-  #else
-    #define PS_ON_PIN                       PG11  // PW_OFF
-  #endif
-  #define KILL_PIN                          PA2
-  #define KILL_PIN_STATE                    HIGH
-#endif
+//#define FIL_RUNOUT_PIN                    PE6   // MT_DET2
+//#define FIL_RUNOUT_PIN                    PG14  // MT_DET3
 
 //
 // SD Card
@@ -237,7 +225,7 @@
   #define TFT_CS_PIN                 FSMC_CS_PIN
   #define TFT_RS_PIN                 FSMC_RS_PIN
 
-  #define LCD_RESET_PIN                     PC6
+  #define LCD_RESET_PIN                     PF6
   #define LCD_BACKLIGHT_PIN                 PD13
 
   #define TFT_BUFFER_SIZE                  14400
@@ -299,18 +287,21 @@
 
 #endif
 
-// Alter timing for graphical display
-#if IS_U8GLIB_ST7920
-  #define BOARD_ST7920_DELAY_1               125
-  #define BOARD_ST7920_DELAY_2               125
-  #define BOARD_ST7920_DELAY_3               125
+#ifndef BOARD_ST7920_DELAY_1
+  #define BOARD_ST7920_DELAY_1              DELAY_NS(125)
+#endif
+#ifndef BOARD_ST7920_DELAY_2
+  #define BOARD_ST7920_DELAY_2              DELAY_NS(125)
+#endif
+#ifndef BOARD_ST7920_DELAY_3
+  #define BOARD_ST7920_DELAY_3              DELAY_NS(125)
 #endif
 
 #define HAS_SPI_FLASH                          1
 #if HAS_SPI_FLASH
   #define SPI_FLASH_SIZE               0x1000000  // 16MB
-  #define SPI_FLASH_CS_PIN                  PB12  // Flash chip-select
-  #define SPI_FLASH_MOSI_PIN                PB15
-  #define SPI_FLASH_MISO_PIN                PB14
-  #define SPI_FLASH_SCK_PIN                 PB13
+  #define W25QXX_CS_PIN                     PB12  // Flash chip-select
+  #define W25QXX_MOSI_PIN                   PB15
+  #define W25QXX_MISO_PIN                   PB14
+  #define W25QXX_SCK_PIN                    PB13
 #endif

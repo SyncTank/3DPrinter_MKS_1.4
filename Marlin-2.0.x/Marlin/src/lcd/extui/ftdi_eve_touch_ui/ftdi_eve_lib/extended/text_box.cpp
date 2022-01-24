@@ -23,40 +23,36 @@
 
 #if ENABLED(FTDI_EXTENDED)
 
-#define IS_LINE_SEPARATOR(c) c == '\n' || c == '\t'
-#define IS_WORD_SEPARATOR(c) c == ' '
-#define IS_SEPARATOR(c) IS_LINE_SEPARATOR(c) || IS_WORD_SEPARATOR(c)
-
 namespace FTDI {
   /**
    * Given a str, end will be set to the position at which a line needs to
    * be broken so that the display width is less than w. The line will also
    * be broken after a '\n'. Returns the display width of the line.
    */
-  static uint16_t find_line_break(const FontMetrics &utf8_fm, const CLCD::FontMetrics &clcd_fm, const uint16_t w, const char *start, const char *&end, bool use_utf8) {
-    const char *p = start;
-    end = start;
+  static uint16_t find_line_break(const FontMetrics &utf8_fm, const CLCD::FontMetrics &clcd_fm, const uint16_t w, const char *str, const char *&end, bool use_utf8) {
+    const char *p = str;
+    end = str;
     uint16_t lw = 0, result = 0;
     for (;;) {
       const char *next = p;
-      const utf8_char_t c = get_utf8_char_and_inc(next);
+      utf8_char_t c = get_utf8_char_and_inc(next);
       // Decide whether to break the string at this location
-      if (IS_SEPARATOR(c) || c == '\0' ) {
+      if (c == '\n' || c == '\0' || c == ' ') {
         end = p;
         result = lw;
       }
-      if (IS_LINE_SEPARATOR(c) || c == '\0') break;
-      // Measure the next character
-      const uint16_t cw = use_utf8 ? utf8_fm.get_char_width(c) : clcd_fm.char_widths[(uint8_t)c];
-      // Stop processing once string exceeds the display width
-      if (lw + cw > w) break;
+      if (c == '\n' || c == '\0') break;
       // Now add the length of the current character to the tally.
-      lw += cw;
+      lw += use_utf8 ? utf8_fm.get_char_width(c) : clcd_fm.char_widths[(uint8_t)c];
+      // Stop processing once string exceeds the display width
+      if (lw >= w) {
+        if (end == str) {
+          end = p;
+          result = lw;
+        }
+        break;
+      }
       p = next;
-    }
-    if (end == start) {
-      end = p;
-      result = lw;
     }
     return result;
   }
@@ -70,13 +66,12 @@ namespace FTDI {
     const uint16_t wrap_width = width;
     width = height = 0;
     for (;;) {
-      const uint16_t line_width = find_line_break(utf8_fm, clcd_fm, wrap_width, line_start, line_end, use_utf8);
+      uint16_t line_width = find_line_break(utf8_fm, clcd_fm, wrap_width, line_start, line_end, use_utf8);
       width  = max(width, line_width);
       height += utf8_fm.get_height();
-      if (IS_SEPARATOR(*line_end)) line_end++;
-      if (*line_end == '\0') break;
-      if (line_end == line_start) break;
       line_start = line_end;
+      if (line_start[0] == '\n' || line_start[0] == ' ') line_start++;
+      if (line_start[0] == '\0') break;
     }
   }
 
@@ -116,26 +111,29 @@ namespace FTDI {
 
       const size_t line_len = line_end - line_start;
       if (line_len) {
+        char line[line_len + 1];
+        strncpy(line, line_start, line_len);
+        line[line_len] = 0;
+
         #if ENABLED(TOUCH_UI_USE_UTF8)
-          if (use_utf8)
-            draw_utf8_text(cmd, x + dx, y + dy, line_start, utf8_fm.fs, options & ~(OPT_CENTERY | OPT_BOTTOMY), line_len);
-          else
+          if (use_utf8) {
+            draw_utf8_text(cmd, x + dx, y + dy, line, utf8_fm.fs, options & ~(OPT_CENTERY | OPT_BOTTOMY));
+          } else
         #endif
           {
             cmd.CLCD::CommandFifo::text(x + dx, y + dy, font, options & ~(OPT_CENTERY | OPT_BOTTOMY));
-            cmd.CLCD::CommandFifo::str(line_start, line_len);
+            cmd.CLCD::CommandFifo::str(line);
           }
       }
       y += utf8_fm.get_height();
 
-      if (IS_SEPARATOR(*line_end)) line_end++;
-      if (*line_end == '\0') break;
-      if (line_end == line_start) break;
       line_start = line_end;
+      if (line_start[0] == '\n' || line_start[0] == ' ') line_start++;
+      if (line_start[0] == '\0') break;
     }
   }
 
-  void draw_text_box(CommandProcessor& cmd, int x, int y, int w, int h, FSTR_P pstr, uint16_t options, uint8_t font) {
+  void draw_text_box(CommandProcessor& cmd, int x, int y, int w, int h, progmem_str pstr, uint16_t options, uint8_t font) {
     char str[strlen_P((const char*)pstr) + 1];
     strcpy_P(str, (const char*)pstr);
     draw_text_box(cmd, x, y, w, h, (const char*) str, options, font);

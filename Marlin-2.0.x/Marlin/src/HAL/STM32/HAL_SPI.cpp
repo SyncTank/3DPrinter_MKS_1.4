@@ -20,9 +20,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-#include "../platforms.h"
-
-#ifdef HAL_STM32
+#if defined(ARDUINO_ARCH_STM32) && !defined(STM32GENERIC) && !defined(MAPLE_STM32F1)
 
 #include "../../inc/MarlinConfig.h"
 
@@ -47,9 +45,7 @@ static SPISettings spiConfig;
   #include "../shared/Delay.h"
 
   void spiBegin(void) {
-    #if PIN_EXISTS(SD_SS)
-      OUT_WRITE(SD_SS_PIN, HIGH);
-    #endif
+    OUT_WRITE(SD_SS_PIN, HIGH);
     OUT_WRITE(SD_SCK_PIN, HIGH);
     SET_INPUT(SD_MISO_PIN);
     OUT_WRITE(SD_MOSI_PIN, HIGH);
@@ -228,4 +224,4 @@ static SPISettings spiConfig;
 
 #endif // SOFTWARE_SPI
 
-#endif // HAL_STM32
+#endif // ARDUINO_ARCH_STM32 && !STM32GENERIC && !MAPLE_STM32F1

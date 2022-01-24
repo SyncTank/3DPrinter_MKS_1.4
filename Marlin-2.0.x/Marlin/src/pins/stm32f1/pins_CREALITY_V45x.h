@@ -64,9 +64,7 @@
 //
 // Probe
 //
-#ifndef PROBE_TARE_PIN
-  #define PROBE_TARE_PIN                    PA5
-#endif
+#define PROBE_TARE_PIN                      PA5
 
 //
 // Steppers

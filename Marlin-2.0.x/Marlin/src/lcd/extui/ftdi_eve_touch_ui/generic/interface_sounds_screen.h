@@ -51,5 +51,7 @@ class InterfaceSoundsScreen : public BaseScreen, public CachedScreen<INTERFACE_S
 
     static void onEntry();
     static void onRedraw(draw_mode_t);
+    static bool onTouchStart(uint8_t tag);
     static bool onTouchEnd(uint8_t tag);
+    static void onIdle();
 };

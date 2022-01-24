@@ -19,10 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-
-#include "../../platforms.h"
-
-#ifdef HAL_STM32
+#if defined(ARDUINO_ARCH_STM32) && !defined(STM32GENERIC) && !defined(MAPLE_STM32F1)
 
 #include "../../../inc/MarlinConfig.h"
 
@@ -161,11 +158,11 @@ uint32_t TFT_SPI::ReadID(uint16_t Reg) {
     for (i = 0; i < 4; i++) {
       #if TFT_MISO_PIN != TFT_MOSI_PIN
         //if (hspi->Init.Direction == SPI_DIRECTION_2LINES) {
-          while (!__HAL_SPI_GET_FLAG(&SPIx, SPI_FLAG_TXE)) {}
+          while ((SPIx.Instance->SR & SPI_FLAG_TXE) != SPI_FLAG_TXE) {}
           SPIx.Instance->DR = 0;
         //}
       #endif
-      while (!__HAL_SPI_GET_FLAG(&SPIx, SPI_FLAG_RXNE)) {}
+      while ((SPIx.Instance->SR & SPI_FLAG_RXNE) != SPI_FLAG_RXNE) {}
       Data = (Data << 8) | SPIx.Instance->DR;
     }
 
@@ -195,8 +192,8 @@ bool TFT_SPI::isBusy() {
 
 void TFT_SPI::Abort() {
   // Wait for any running spi
-  while (!__HAL_SPI_GET_FLAG(&SPIx, SPI_FLAG_TXE)) {}
-  while ( __HAL_SPI_GET_FLAG(&SPIx, SPI_FLAG_BSY)) {}
+  while ((SPIx.Instance->SR & SPI_FLAG_TXE) != SPI_FLAG_TXE) {}
+  while ((SPIx.Instance->SR & SPI_FLAG_BSY) == SPI_FLAG_BSY) {}
   // First, abort any running dma
   HAL_DMA_Abort(&DMAtx);
   // DeInit objects
@@ -214,8 +211,8 @@ void TFT_SPI::Transmit(uint16_t Data) {
 
   SPIx.Instance->DR = Data;
 
-  while (!__HAL_SPI_GET_FLAG(&SPIx, SPI_FLAG_TXE)) {}
-  while ( __HAL_SPI_GET_FLAG(&SPIx, SPI_FLAG_BSY)) {}
+  while ((SPIx.Instance->SR & SPI_FLAG_TXE) != SPI_FLAG_TXE) {}
+  while ((SPIx.Instance->SR & SPI_FLAG_BSY) == SPI_FLAG_BSY) {}
 
   if (TFT_MISO_PIN != TFT_MOSI_PIN)
     __HAL_SPI_CLEAR_OVRFLAG(&SPIx);   // Clear overrun flag in 2 Lines communication mode because received is not read
@@ -243,4 +240,4 @@ void TFT_SPI::TransmitDMA(uint32_t MemoryIncrease, uint16_t *Data, uint16_t Coun
 }
 
 #endif // HAS_SPI_TFT
-#endif // HAL_STM32
+#endif // ARDUINO_ARCH_STM32 && !STM32GENERIC && !MAPLE_STM32F1

@@ -117,12 +117,14 @@
 //#define E3_MS2_PIN         ?
 //#define E3_MS3_PIN         ?
 
-#if USES_Z_MIN_PROBE_PIN
+#if HAS_CUSTOM_PROBE_PIN
   #define Z_MIN_PROBE_PIN                     49
 #endif
 
-#ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN               Y_MIN_PIN
+#if HAS_FILAMENT_SENSOR
+  #ifndef FIL_RUNOUT_PIN
+    #define FIL_RUNOUT_PIN             Y_MIN_PIN
+  #endif
 #endif
 
 //
@@ -188,11 +190,11 @@
 //#define EEPROM_SD                               // EEPROM on SDCARD
 //#define SPI_EEPROM                              // EEPROM on SPI-0
 //#define SPI_CHAN_EEPROM1        ?
-//#define SPI_EEPROM1_CS_PIN      ?
+//#define SPI_EEPROM1_CS          ?
 // 2K EEPROM
-//#define SPI_EEPROM2_CS_PIN      ?
+//#define SPI_EEPROM2_CS          ?
 // 32Mb FLASH
-//#define SPI_FLASH_CS_PIN        ?
+//#define SPI_FLASH_CS            ?
 
 //
 // LCD / Controller

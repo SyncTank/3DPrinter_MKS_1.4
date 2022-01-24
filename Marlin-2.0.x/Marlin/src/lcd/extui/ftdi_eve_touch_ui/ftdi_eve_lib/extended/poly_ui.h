@@ -272,7 +272,7 @@ class GenericPolyUI {
       if (clip) {
         // Clipping reduces the number of pixels that are
         // filled, allowing more complex shapes to be drawn
-        // in the allotted time.
+        // in the alloted time.
         bounds(r, x, y, w, h);
         cmd.cmd(SAVE_CONTEXT());
         cmd.cmd(SCISSOR_XY(x, y));
