@@ -30,20 +30,17 @@ For TMC2208 chips on the MKS_GEN_V1.4 its two cap on each stepper for 1/16.<br>
 
 <h2>Stepper Driver (TMC2208 )</h2>
 
-For whatever chip you get set the potentiometer to the vRef you will be working with on your motors. (Safety) <br>
-This is done with the screw looking like insert on the chip, first with the printer off place the chip in the pins <br>
-correct orientation is required otherwise you will burn the chip. Reference your documents if not its usually GND facing motor and pins inwards<br>
-
-https://www.youtube.com/watch?v=k3Uc1F5jgVQ&t=35s
-
-![image](https://user-images.githubusercontent.com/30980904/149042785-a5fbd2d1-5640-4d53-907b-e51a33d29fad.png) <br>
+For each chip you get set the potentiometer to the vRef you will be working with on your motors. (Safety) <br>
+This is done with the screw looking like insert on the chip, to get a measurement on the potentiometer place the chip in the correct orientation otherwise you will burn the chip and then measure it with a multimeter. Reference documents for orientation, usually its GND facing motor and DIR inwards.<br>
+[TMC2208](https://www.youtube.com/watch?v=k3Uc1F5jgVQ&t=35s)<br>
 
 <h3>Potentiometer</h3> <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149039989-af1e1c65-7070-47f0-b46b-936a336d074c.png) <br>
 
-To do this find the Rated Current of your motor which is done by googling and finding the spec sheet. <br>
-Most of the time you will have a label on the motor google this i.e <br>
+<h3>Setting VRef</h3> <br>
+To find the Rated Current of your motor google the label on the motor to find the specsheet. <br>
+From this you should be able to obtain the Rated current which is what we will need to set the VRef. <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149040225-6ea72dca-b8be-4748-8faa-166fdb6b2d62.png) <br>
 
@@ -64,17 +61,24 @@ This is already done with the chip used in this project BIGTREE TMC2208 V3.0 UAR
 
 ![image](https://user-images.githubusercontent.com/30980904/149041022-8b46c902-cba5-4044-9e05-ca0190959511.png) <br>
 
-If your using SKR board reference the SKR in datasheets as that board is the only one I know that supports single wire UArt <br>
-For the rest of us connect two jumper wires on the PDN & UART connection on the board. <br>
+If your using the SKR board, know that you only need one wire for the connection to the pinout with Tx & Rx being the same. <br>
+For other boards connect one wire with two connection, one for Tx ( Resistor ) and another for Rx. <br> 
+This will <b>enable</b> the UART feature from the chip, connect them to the correct pinouts and your done. <br>
 
-![image](https://user-images.githubusercontent.com/30980904/149041512-5acfe1b2-9c58-4d05-a1d6-510ca2934222.png) <br>
+![image](https://user-images.githubusercontent.com/30980904/150111765-d5d03267-5f8c-4f49-9cb0-d6d93637d3b3.png) <br>
+
 
 One of the wires will need a 1k Ohm resistor on it, this can be done with protoboards, jumpers, or soldering. (Done for each stepper) <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149041622-a651139b-7dcf-4e8d-bca0-567cb96744ee.png) <br>
 
+![image](https://user-images.githubusercontent.com/30980904/150138023-ce755e9e-ab0a-4931-a513-d219371912fc.png) <br>
+
+
 The <b>resistor</b> one will be our Tx (Transmit) pin, the other is the Rx (receiver) pin. <br>
-You can start connecting the pins follow this diagram. <br>
+You can start connecting the pins following the diagram below. <br>
+
+![image](https://user-images.githubusercontent.com/30980904/150113930-3652386c-aa59-4f24-9dee-09270f4ac809.png) <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149041968-9279b412-681b-43ed-90e9-9c073a80363d.png) <br>
 
@@ -226,6 +230,7 @@ Set X,Y,Z,E0(Z2) Current and Microsteps. <br>
 ![image](https://user-images.githubusercontent.com/30980904/149713315-d73889d0-f168-49ff-bfe6-2759b465471f.png) <br>
 
 For debugged on the printer <b>enable</b> <b>TMC_DEBUG</b> & <b>MONITOR_DRIVER_STATUS</b>. <br>
+Depending on your TMC2208 driver you can have a issue with the MONITOR_DRIVER_STATUS, if so the only option so far is to disable it.<br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149713466-418ae3a4-660c-4a11-bcf0-f369d66185c2.png) <br>
 
@@ -244,12 +249,18 @@ Nice! You just finished both the wiring and firmware, now just build/compile and
 
 <h2>DataSheet | References</h2><br>
 
-TMC2208 : https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC220x_TMC2224_Datasheet_Rev1.10.pdf <br>
+TMC2208 : <br>
+https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC220x_TMC2224_Datasheet_Rev1.10.pdf <br>
+
+https://cdn-3d.niceshops.com/upload/file/TMC2208-V3.0_manual.pdf <br>
 
 https://www.youtube.com/watch?v=7VHwcEroHPk&t=550s <br>
 
 Pinouts for the MKS_GEN_V1.4<br>
 ![image](https://user-images.githubusercontent.com/30980904/148620455-03ec13d7-c8cf-4827-8ac7-2358e2bd6681.png) <br>
+
+![image](https://user-images.githubusercontent.com/30980904/150173916-ae232595-a13a-4cb8-b68f-a0d6332b4edf.png) <br>
+
 
 https://www.roboter-bausatz.de/media/pdf/0b/f0/a7/MKS-Gen-DataSheet.pdf <br>
 
