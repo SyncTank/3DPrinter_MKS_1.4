@@ -261,6 +261,7 @@ Pinouts for the MKS_GEN_V1.4<br>
 
 ![image](https://user-images.githubusercontent.com/30980904/150173916-ae232595-a13a-4cb8-b68f-a0d6332b4edf.png) <br>
 
+https://reprap.org/wiki/MKS_GEN
 
 https://www.roboter-bausatz.de/media/pdf/0b/f0/a7/MKS-Gen-DataSheet.pdf <br>
 
