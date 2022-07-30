@@ -256,6 +256,8 @@ https://cdn-3d.niceshops.com/upload/file/TMC2208-V3.0_manual.pdf <br>
 
 https://www.youtube.com/watch?v=7VHwcEroHPk&t=550s <br>
 
+DataSheet: https://trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC220x_TMC2224_datasheet_Rev1.09.pdf <br>
+
 Pinouts for the MKS_GEN_V1.4<br>
 ![image](https://user-images.githubusercontent.com/30980904/148620455-03ec13d7-c8cf-4827-8ac7-2358e2bd6681.png) <br>
 
@@ -268,6 +270,7 @@ https://www.roboter-bausatz.de/media/pdf/0b/f0/a7/MKS-Gen-DataSheet.pdf <br>
 TMC2208 Setup SKR
 SKR : https://www.instructables.com/TMC2208-UART-on-BigTreeTechBIQU-SKR-V11-and-V13-Co/ <br>
 UART : https://www.youtube.com/watch?v=sSO3Xd0a0Z8 <br>
+BigTree TMC: https://github.com/bigtreetech/BIGTREETECH-TMC2208-V3.0/blob/master/TMC2208-V3.0%20manual.pdf <br>
 
 ANet A8 : <br>
 https://caggius.wordpress.com/anet-a8-hardware-specifications/ <br>
