@@ -14,7 +14,7 @@ Comming from the base of a Anet A8 plus most of the wires you can just plug in. 
 
 ![image](https://user-images.githubusercontent.com/30980904/148626779-cb2ca516-b31d-4285-9a10-1c3d6408c83b.png) <br>
 
-<h3>I do this electrical tape and some jumper wires, alternatively you can remove the clipper and reclip them</h3> <br>
+<h3>Do this with electrical tape and some jumper wires, alternatively you can remove the clipper and reclip them</h3> <br>
 
 ![image](https://user-images.githubusercontent.com/30980904/149034906-d9aa0882-5dd5-4037-8c3b-9f7f954371af.png)<br>
 
